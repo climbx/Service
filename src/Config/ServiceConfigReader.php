@@ -41,7 +41,8 @@ class ServiceConfigReader
             $serviceConfig = $this->servicesConfig->get($id);
         } catch (BagNotFoundExceptionInterface) {
             throw new ServiceConfigNotFoundException(sprintf(
-                'The service "%s" configuration is missing in services config file.', $id
+                'The service "%s" configuration is missing in services config file.',
+                $id
             ));
         }
 
@@ -49,13 +50,16 @@ class ServiceConfigReader
             return ($this->isValidConfigParamType($paramType, $serviceConfig[$paramName])) ?
                 $serviceConfig[$paramName] :
                 throw new InvalidArgumentException(sprintf(
-                    'The parameter "%s" value has not valid type in "%s" service config file.', $paramName, $id
+                    'The parameter "%s" value has not valid type in "%s" service config file.',
+                    $paramName,
+                    $id
                 ));
         }
 
         throw new ServiceConfigParameterNotFoundException(sprintf(
             'The parameter "%s" is required in service "%s" and has not been declared in services config file',
-            $paramName, $id
+            $paramName,
+            $id
         ));
     }
 
