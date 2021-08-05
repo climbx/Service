@@ -1,2 +1,7 @@
 /vendor/
 .phpunit.cache/
+
+# Dev Example
+/src/Example/
+/config/
+index.php
