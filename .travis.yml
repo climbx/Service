@@ -10,8 +10,10 @@ branches:
   only:
     - '1.0'
 
-before_script:
+install:
   - composer install
+
+before_script:
   # Prepare code coverage report for CodeClimate
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
