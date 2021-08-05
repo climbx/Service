@@ -31,4 +31,20 @@ class ContainerGetWithoutParamTest extends TestCase
         $alreadyLoadedService = $container->get(SimpleTestService::class);
         $this->assertEquals($alreadyLoadedService, $simpleService);
     }
+
+    /**
+     * @uses \Climbx\Service\Tests\TestServiceWithNoConstructorArgument
+     */
+    public function testGetWithEmptyConstructorService()
+    {
+        $configContainer = $this->createStub(ConfigContainer::class);
+        $configReader = $this->createStub(ServiceConfigReader::class);
+
+        $container = new Container($configContainer, $configReader);
+
+        $service = $container->get(TestServiceWithNoConstructorArgument::class);
+
+        // loading service into the container
+        $this->assertInstanceOf(TestServiceWithNoConstructorArgument::class, $service);
+    }
 }

@@ -25,4 +25,21 @@ class ContainerHasTest extends TestCase
         $this->assertTrue($container->has(SimpleTestService::class));
         $this->assertFalse($container->has('My\Fake\Class'));
     }
+
+    /**
+     * @uses \Climbx\Service\Tests\TestServiceWithServiceParam
+     * @uses \Climbx\Service\Tests\TestServiceDependency
+     */
+    public function testHasWithAlreadyLoadedService()
+    {
+        $configContainer = $this->createStub(ConfigContainer::class);
+        $serviceConfigReader = $this->createStub(ServiceConfigReader::class);
+
+        $container = new Container($configContainer, $serviceConfigReader);
+
+        $container->get(TestServiceWithServiceParam::class);
+
+        // Dependency should already exist in the container
+        $this->assertTrue($container->has(TestServiceDependency::class));
+    }
 }
