@@ -10,10 +10,11 @@ branches:
   only:
     - '1.0'
 
-install:
-  - composer install
-
 before_script:
+  # Yaml extension
+  - sudo apt-get install php-pear
+  - sudo printf "\n" | pecl install yaml
+  - composer install
   # Prepare code coverage report for CodeClimate
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
