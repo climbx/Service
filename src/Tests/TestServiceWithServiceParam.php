@@ -11,6 +11,6 @@ class TestServiceWithServiceParam
 {
     public function __construct(
         public TestServiceDependency $serviceParam
-    ){
+    ) {
     }
 }

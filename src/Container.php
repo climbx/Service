@@ -103,9 +103,9 @@ class Container implements ContainerInterface
 
         foreach ($reflectionParameters as $param) {
             if (!$param->hasType()) {
-                throw new InvalidArgumentException(sprintf(
-                    'The argument "%s" type has not been defined in service "%s"', $param->getName(), $id,
-                ));
+                throw new InvalidArgumentException(
+                    sprintf('The argument "%s" type has not been defined in service "%s"', $param->getName(), $id,)
+                );
             }
 
             $paramType = $param->getType()->getName();
@@ -119,15 +119,17 @@ class Container implements ContainerInterface
                 ConfigBagInterface::class =>
                     $this->configContainer->get(
                         (string) $this->serviceConfigReader->getParamValue(
-                            $id, $param->getName(), ServiceConfigReader::PARAM_TYPE_STRING
+                            $id,
+                            $param->getName(),
+                            ServiceConfigReader::PARAM_TYPE_STRING
                         )
                     ),
                 default =>
                     ($this->has($this->getClassFromInterface($paramType))) ?
                         $this->get($this->getClassFromInterface($paramType)) :
-                        throw new InvalidArgumentException(sprintf(
-                            'Argument "%s" has invalid type in service "%s"', $param->getName(), $id,
-                        ))
+                        throw new InvalidArgumentException(
+                            sprintf('Argument "%s" has invalid type in service "%s"', $param->getName(), $id,)
+                        )
             };
         }
 
@@ -141,6 +143,6 @@ class Container implements ContainerInterface
      */
     private function getClassFromInterface($serviceName): string
     {
-        return (str_ends_with($serviceName, 'Interface')) ? substr($serviceName, 0,-9) : $serviceName;
+        return (str_ends_with($serviceName, 'Interface')) ? substr($serviceName, 0, -9) : $serviceName;
     }
 }
