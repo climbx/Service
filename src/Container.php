@@ -104,13 +104,13 @@ class Container implements ContainerInterface
         foreach ($reflectionParameters as $param) {
             if (!$param->hasType()) {
                 throw new InvalidArgumentException(
-                    sprintf('The argument "%s" type has not been defined in service "%s"', $param->getName(), $id,)
+                    sprintf('The argument "%s" type has not been defined in service "%s"', $param->getName(), $id)
                 );
             }
 
             $paramType = $param->getType()->getName();
 
-            $params[$param->getPosition()] = match ($paramType) {
+            $params[$param->getPosition()] = match($paramType) {
                 ServiceConfigReader::PARAM_TYPE_BOOL,
                 ServiceConfigReader::PARAM_TYPE_INT,
                 ServiceConfigReader::PARAM_TYPE_STRING,
@@ -128,7 +128,7 @@ class Container implements ContainerInterface
                     ($this->has($this->getClassFromInterface($paramType))) ?
                         $this->get($this->getClassFromInterface($paramType)) :
                         throw new InvalidArgumentException(
-                            sprintf('Argument "%s" has invalid type in service "%s"', $param->getName(), $id,)
+                            sprintf('Argument "%s" has invalid type in service "%s"', $param->getName(), $id)
                         )
             };
         }
